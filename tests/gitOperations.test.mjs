@@ -26,21 +26,21 @@ describe('gitOperations', () => {
 
     expect(logMock.info).toHaveBeenCalledWith('Starting git operations');
     expect(logMock.info).toHaveBeenCalledWith('composer.json exists - running composer upgrade');
-    expect(execSyncMock).toHaveBeenCalledWith('COMPOSER_HOME="." COMPOSER_ALLOW_SUPERUSER=1 composer upgrade');
+    expect(execSyncMock).toHaveBeenCalledWith('COMPOSER_HOME="." COMPOSER_ALLOW_SUPERUSER=1 composer upgrade', { stdio: 'inherit' });
     expect(logMock.info).toHaveBeenCalledWith('Running composer bump');
-    expect(execSyncMock).toHaveBeenCalledWith('COMPOSER_HOME="." COMPOSER_ALLOW_SUPERUSER=1 composer bump');
+    expect(execSyncMock).toHaveBeenCalledWith('COMPOSER_HOME="." COMPOSER_ALLOW_SUPERUSER=1 composer bump', { stdio: 'inherit' });
     expect(logMock.info).toHaveBeenCalledWith('package.json exists - running npm upgrade');
-    expect(execSyncMock).toHaveBeenCalledWith('npm upgrade');
+    expect(execSyncMock).toHaveBeenCalledWith('npm upgrade', { stdio: 'inherit' });
     expect(logMock.info).toHaveBeenCalledWith('Adding all changes to git');
-    expect(execSyncMock).toHaveBeenCalledWith('git add -A');
+    expect(execSyncMock).toHaveBeenCalledWith('git add -A', { stdio: 'inherit' });
     expect(logMock.info).toHaveBeenCalledWith(`Committing with message: Version ${mockVersion} - ${dateFormatted}`);
-    expect(execSyncMock).toHaveBeenCalledWith(`git commit -m 'Version ${mockVersion} - ${dateFormatted}'`);
+    expect(execSyncMock).toHaveBeenCalledWith(`git commit -m 'Version ${mockVersion} - ${dateFormatted}'`, { stdio: 'inherit' });
     expect(logMock.info).toHaveBeenCalledWith(`Tagging commit with tag: ${mockVersion}`);
-    expect(execSyncMock).toHaveBeenCalledWith(`git tag ${mockVersion}`);
+    expect(execSyncMock).toHaveBeenCalledWith(`git tag ${mockVersion}`, { stdio: 'inherit' });
     expect(logMock.info).toHaveBeenCalledWith('Pushing commits to origin');
-    expect(execSyncMock).toHaveBeenCalledWith('git push');
+    expect(execSyncMock).toHaveBeenCalledWith('git push', { stdio: 'inherit' });
     expect(logMock.info).toHaveBeenCalledWith('Pushing tags to origin');
-    expect(execSyncMock).toHaveBeenCalledWith('git push --tags');
+    expect(execSyncMock).toHaveBeenCalledWith('git push --tags', { stdio: 'inherit' });
     expect(logMock.info).toHaveBeenCalledWith('Git operations complete');
   });
 
@@ -50,15 +50,15 @@ describe('gitOperations', () => {
     gitOperations(execSyncMock, fsMock, logMock, mockVersion);
 
     expect(logMock.info).toHaveBeenCalledWith('Starting git operations');
-    expect(execSyncMock).toHaveBeenCalledWith('git add -A');
+    expect(execSyncMock).toHaveBeenCalledWith('git add -A', { stdio: 'inherit' });
     expect(logMock.info).toHaveBeenCalledWith(`Committing with message: Version ${mockVersion} - ${dateFormatted}`);
-    expect(execSyncMock).toHaveBeenCalledWith(`git commit -m 'Version ${mockVersion} - ${dateFormatted}'`);
+    expect(execSyncMock).toHaveBeenCalledWith(`git commit -m 'Version ${mockVersion} - ${dateFormatted}'`, { stdio: 'inherit' });
     expect(logMock.info).toHaveBeenCalledWith(`Tagging commit with tag: ${mockVersion}`);
-    expect(execSyncMock).toHaveBeenCalledWith(`git tag ${mockVersion}`);
+    expect(execSyncMock).toHaveBeenCalledWith(`git tag ${mockVersion}`, { stdio: 'inherit' });
     expect(logMock.info).toHaveBeenCalledWith('Pushing commits to origin');
-    expect(execSyncMock).toHaveBeenCalledWith('git push');
+    expect(execSyncMock).toHaveBeenCalledWith('git push', { stdio: 'inherit' });
     expect(logMock.info).toHaveBeenCalledWith('Pushing tags to origin');
-    expect(execSyncMock).toHaveBeenCalledWith('git push --tags');
+    expect(execSyncMock).toHaveBeenCalledWith('git push --tags', { stdio: 'inherit' });
   });
 });
 
