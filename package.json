@@ -1,7 +1,7 @@
 {
     "name": "@purinton/tagit",
     "type": "module",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "A template for starting new Node.js projects.",
     "main": "tagit.mjs",
     "scripts": {

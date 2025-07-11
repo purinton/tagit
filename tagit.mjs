@@ -19,7 +19,7 @@ import { gitOperations } from './src/gitOperations.mjs';
   try {
     const newVersion = await updateVersionFiles(fs, log);
     log.info(`Updated version to ${newVersion}`);
-    gitOperations(execSync, fs, log);
+    gitOperations(execSync, fs, log, newVersion);
   } catch (error) {
     log.error(error);
     process.exit(1);

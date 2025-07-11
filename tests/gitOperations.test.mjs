@@ -6,6 +6,7 @@ describe('gitOperations', () => {
   let fsMock;
   let logMock;
   const mockVersion = '1.0.42';
+  const dateFormatted = new Date().toLocaleDateString('en-US', {month: '2-digit', day: '2-digit', year: 'numeric'}).replace(/\//g, '-');
 
   beforeEach(() => {
     execSyncMock = jest.fn();
@@ -32,8 +33,8 @@ describe('gitOperations', () => {
     expect(execSyncMock).toHaveBeenCalledWith('npm upgrade');
     expect(logMock.info).toHaveBeenCalledWith('Adding all changes to git');
     expect(execSyncMock).toHaveBeenCalledWith('git add -A');
-    expect(logMock.info).toHaveBeenCalledWith(`Committing with message: Version ${mockVersion}`);
-    expect(execSyncMock).toHaveBeenCalledWith(`git commit -m 'Version ${mockVersion}'`);
+    expect(logMock.info).toHaveBeenCalledWith(`Committing with message: Version ${mockVersion} - ${dateFormatted}`);
+    expect(execSyncMock).toHaveBeenCalledWith(`git commit -m 'Version ${mockVersion} - ${dateFormatted}'`);
     expect(logMock.info).toHaveBeenCalledWith(`Tagging commit with tag: ${mockVersion}`);
     expect(execSyncMock).toHaveBeenCalledWith(`git tag ${mockVersion}`);
     expect(logMock.info).toHaveBeenCalledWith('Pushing commits to origin');
@@ -50,8 +51,8 @@ describe('gitOperations', () => {
 
     expect(logMock.info).toHaveBeenCalledWith('Starting git operations');
     expect(execSyncMock).toHaveBeenCalledWith('git add -A');
-    expect(logMock.info).toHaveBeenCalledWith(`Committing with message: Version ${mockVersion}`);
-    expect(execSyncMock).toHaveBeenCalledWith(`git commit -m 'Version ${mockVersion}'`);
+    expect(logMock.info).toHaveBeenCalledWith(`Committing with message: Version ${mockVersion} - ${dateFormatted}`);
+    expect(execSyncMock).toHaveBeenCalledWith(`git commit -m 'Version ${mockVersion} - ${dateFormatted}'`);
     expect(logMock.info).toHaveBeenCalledWith(`Tagging commit with tag: ${mockVersion}`);
     expect(execSyncMock).toHaveBeenCalledWith(`git tag ${mockVersion}`);
     expect(logMock.info).toHaveBeenCalledWith('Pushing commits to origin');
