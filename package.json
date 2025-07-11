@@ -2,7 +2,7 @@
     "name": "@purinton/tagit",
     "type": "module",
     "version": "1.0.5",
-    "description": "A template for starting new Node.js projects.",
+    "description": "Automated version management and Git operations for Node.js and PHP projects.",
     "main": "tagit.mjs",
     "scripts": {
         "start": "node tagit.mjs",
@@ -14,7 +14,15 @@
     },
     "keywords": [
         "tagit",
-        "nodejs"
+        "versioning",
+        "git",
+        "automation",
+        "nodejs",
+        "composer",
+        "package.json",
+        "composer.json",
+        "release",
+        "cli"
     ],
     "author": "Russell Purinton <russell@purinton.us>",
     "license": "MIT",
