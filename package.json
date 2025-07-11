@@ -1,7 +1,7 @@
 {
     "name": "@purinton/tagit",
     "type": "module",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Automated version management and Git operations for Node.js and PHP projects.",
     "main": "tagit.mjs",
     "scripts": {
