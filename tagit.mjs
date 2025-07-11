@@ -17,9 +17,9 @@ import { gitOperations } from './src/gitOperations.mjs';
   log.info('tagit Started');
 
   try {
-    const newVersion = await updateVersionFiles(fs);
+    const newVersion = await updateVersionFiles(fs, log);
     log.info(`Updated version to ${newVersion}`);
-    gitOperations(execSync, fs);
+    gitOperations(execSync, fs, log);
   } catch (error) {
     log.error(error);
     process.exit(1);
