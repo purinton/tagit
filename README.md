@@ -1,15 +1,17 @@
 # [![Purinton Dev](https://purinton.us/logos/brand.png)](https://discord.gg/QSBxQnX7PF)
 
-## @purinton/tagit [![npm version](https://img.shields.io/npm/v/@purinton/tagit.svg)](https://www.npmjs.com/package/@purinton/tagit)[![license](https://img.shields.io/github/license/purinton/tagit.svg)](LICENSE)[![build status](https://github.com/purinton/tagit/actions/workflows/nodejs.yml/badge.svg)](https://github.com/purinton/tagit/actions)
+## @purinton/tagit [![npm version](https://img.shields.io/npm/v/@purinton/tagit.svg)](https://www.npmjs.com/package/@purinton/tagit) [![license](https://img.shields.io/github/license/purinton/tagit.svg)](LICENSE) [![build status](https://github.com/purinton/tagit/actions/workflows/nodejs.yml/badge.svg)](https://github.com/purinton/tagit/actions)
 
-A starter template for new Node.js projects. Use this as a foundation for your next application or service.
+A starter template and version management tool for Node.js projects designed to increment project versions, update version files, and automate Git operations including commits and tagging. It serves as a foundation for managing project versioning lifecycle with integrated logging and signal handling.
 
 ---
 
 ## Table of Contents
 
 - [Features](#features)
+- [What It Does](#what-it-does)
 - [Getting Started](#getting-started)
+- [Usage](#usage)
 - [Development](#development)
 - [Testing](#testing)
 - [Customization](#customization)
@@ -20,9 +22,25 @@ A starter template for new Node.js projects. Use this as a foundation for your n
 
 - Pre-configured for Node.js (ESM)
 - Environment variable support via dotenv
-- Logging and signal handling via `@purinton/common`
-- Jest for testing
+- Detailed logging and signal handling via `@purinton/common`
+- Automated version incrementing for `composer.json` and `package.json`
+- Git operations: commit changes, tag with version and date, push commits and tags
+- Jest testing framework pre-configured
 - MIT License
+
+## What It Does
+
+`tagit` automates the versioning workflow for your Node.js projects by:
+
+- Reading and incrementing the semantic version from `composer.json` or `package.json`
+- Writing updated versions back to these files
+- Committing the changes to Git with message format:  
+  `"Version <version> - MM-DD-YYYY"`
+- Tagging the commit with the version number
+- Pushing commits and tags to the remote repository
+- Logging each step with informational messages
+
+This ensures consistent version management and smooth Git operations for your projects.
 
 ## Getting Started
 
@@ -37,43 +55,59 @@ A starter template for new Node.js projects. Use this as a foundation for your n
    ```
 
 2. **Update project details:**
+
    - Edit `package.json` (name, description, author, etc.)
    - Update this `README.md` as needed
-   - Change the license if required
+   - Adjust license if required
+
+## Usage
+
+Run the version and Git automation script with:
+
+```bash
+./tagit.mjs
+```
+
+Or, to simplify usage, you can create a symlink in your system path:
+
+```bash
+ln -s /var/opt/tagit/tagit.mjs /usr/bin/tagit
+```
+
+Then you can simply run:
+
+```bash
+tagit
+```
 
 ## Development
 
-- Main entry: `tagit.mjs`
-- Start your app:
-
-  ```bash
-  node tagit.mjs
-  ```
-
-- Add your code in new files and import as needed.
+- Main entry point: `tagit.mjs`
+- Core source files under `src/`
+- Add or modify code in `src/` as needed
 
 ## Testing
 
-- Run tests with:
+- Run tests using:
 
   ```bash
   npm test
   ```
 
-- Add your tests in the `__tests__` folder or alongside your code.
+- Tests are located in `tests/`
+- Uses Jest for unit testing and mocking
 
 ## Customization
 
-- Replace or extend the logging and signal handling as needed.
-- Add dependencies and scripts to fit your project.
-- Remove or modify template files and sections.
+- Modify logging, signal handlers, or version increment logic to fit your needs
+- Extend `gitOperations` for custom Git workflows
+- Change supported version files or formats in source modules
 
 ## Support
 
-For help, questions, or to chat with the author and community, visit:
+For help or questions, join the community and chat with the author:
 
-[![Discord](https://purinton.us/logos/discord_96.png)](https://discord.gg/QSBxQnX7PF)[![Purinton Dev](https://purinton.us/logos/purinton_96.png)](https://discord.gg/QSBxQnX7PF)
-
+[![Discord](https://purinton.us/logos/discord_96.png)](https://discord.gg/QSBxQnX7PF)  
 **[Purinton Dev on Discord](https://discord.gg/QSBxQnX7PF)**
 
 ## License
