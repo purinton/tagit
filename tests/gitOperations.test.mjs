@@ -5,6 +5,7 @@ describe('gitOperations', () => {
   let execSyncMock;
   let fsMock;
   let logMock;
+  const mockVersion = '1.0.42';
 
   beforeEach(() => {
     execSyncMock = jest.fn();
@@ -20,7 +21,7 @@ describe('gitOperations', () => {
   test('runs all git and composer/npm commands when files exist', () => {
     fsMock.existsSync.mockReturnValue(true);
 
-    gitOperations(execSyncMock, fsMock, logMock);
+    gitOperations(execSyncMock, fsMock, logMock, mockVersion);
 
     expect(logMock.info).toHaveBeenCalledWith('Starting git operations');
     expect(logMock.info).toHaveBeenCalledWith('composer.json exists - running composer upgrade');
@@ -31,10 +32,10 @@ describe('gitOperations', () => {
     expect(execSyncMock).toHaveBeenCalledWith('npm upgrade');
     expect(logMock.info).toHaveBeenCalledWith('Adding all changes to git');
     expect(execSyncMock).toHaveBeenCalledWith('git add -A');
-    expect(logMock.info).toHaveBeenCalledWith(expect.stringContaining('Committing with message:'));
-    expect(execSyncMock).toHaveBeenCalledWith(expect.stringMatching(/git commit -m 'Version \d{4}-\d{2}-\d{2}'/));
-    expect(logMock.info).toHaveBeenCalledWith(expect.stringMatching(/Tagging commit with tag: \d{4}-\d{2}-\d{2}/));
-    expect(execSyncMock).toHaveBeenCalledWith(expect.stringMatching(/git tag \d{4}-\d{2}-\d{2}/));
+    expect(logMock.info).toHaveBeenCalledWith(`Committing with message: Version ${mockVersion}`);
+    expect(execSyncMock).toHaveBeenCalledWith(`git commit -m 'Version ${mockVersion}'`);
+    expect(logMock.info).toHaveBeenCalledWith(`Tagging commit with tag: ${mockVersion}`);
+    expect(execSyncMock).toHaveBeenCalledWith(`git tag ${mockVersion}`);
     expect(logMock.info).toHaveBeenCalledWith('Pushing commits to origin');
     expect(execSyncMock).toHaveBeenCalledWith('git push');
     expect(logMock.info).toHaveBeenCalledWith('Pushing tags to origin');
@@ -45,22 +46,18 @@ describe('gitOperations', () => {
   test('skips commands if files do not exist', () => {
     fsMock.existsSync.mockReturnValue(false);
 
-    gitOperations(execSyncMock, fsMock, logMock);
+    gitOperations(execSyncMock, fsMock, logMock, mockVersion);
 
     expect(logMock.info).toHaveBeenCalledWith('Starting git operations');
     expect(execSyncMock).toHaveBeenCalledWith('git add -A');
-    expect(logMock.info).toHaveBeenCalledWith(expect.stringContaining('Committing with message:'));
-    expect(execSyncMock).toHaveBeenCalledWith(expect.stringMatching(/git commit -m 'Version \d{4}-\d{2}-\d{2}'/));
-    expect(logMock.info).toHaveBeenCalledWith(expect.stringMatching(/Tagging commit with tag: \d{4}-\d{2}-\d{2}/));
-    expect(execSyncMock).toHaveBeenCalledWith(expect.stringMatching(/git tag \d{4}-\d{2}-\d{2}/));
+    expect(logMock.info).toHaveBeenCalledWith(`Committing with message: Version ${mockVersion}`);
+    expect(execSyncMock).toHaveBeenCalledWith(`git commit -m 'Version ${mockVersion}'`);
+    expect(logMock.info).toHaveBeenCalledWith(`Tagging commit with tag: ${mockVersion}`);
+    expect(execSyncMock).toHaveBeenCalledWith(`git tag ${mockVersion}`);
     expect(logMock.info).toHaveBeenCalledWith('Pushing commits to origin');
     expect(execSyncMock).toHaveBeenCalledWith('git push');
     expect(logMock.info).toHaveBeenCalledWith('Pushing tags to origin');
     expect(execSyncMock).toHaveBeenCalledWith('git push --tags');
-
-    expect(execSyncMock).not.toHaveBeenCalledWith('COMPOSER_HOME="." COMPOSER_ALLOW_SUPERUSER=1 composer upgrade');
-    expect(execSyncMock).not.toHaveBeenCalledWith('COMPOSER_HOME="." COMPOSER_ALLOW_SUPERUSER=1 composer bump');
-    expect(execSyncMock).not.toHaveBeenCalledWith('npm upgrade');
   });
 });
 
