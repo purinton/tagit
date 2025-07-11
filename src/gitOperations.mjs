@@ -1,5 +1,6 @@
 export function gitOperations(execSync, fs, log, newVersion) {
     const date = new Date().toISOString().split('T')[0];
+    const dateFormatted = new Date().toLocaleDateString('en-US', {month: '2-digit', day: '2-digit', year: 'numeric'}).replace(/\//g, '-');
 
     log.info('Starting git operations');
 
@@ -17,8 +18,8 @@ export function gitOperations(execSync, fs, log, newVersion) {
 
     log.info('Adding all changes to git');
     execSync('git add -A');
-    log.info(`Committing with message: Version ${newVersion}`);
-    execSync(`git commit -m 'Version ${newVersion}'`);
+    log.info(`Committing with message: Version ${newVersion} - ${dateFormatted}`);
+    execSync(`git commit -m 'Version ${newVersion} - ${dateFormatted}'`);
     log.info(`Tagging commit with tag: ${newVersion}`);
     execSync(`git tag ${newVersion}`);
     log.info('Pushing commits to origin');
