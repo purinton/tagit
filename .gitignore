@@ -61,5 +61,3 @@ node_modules/
 # Generic cache
 .cache
 
-# built binary
-tagit
