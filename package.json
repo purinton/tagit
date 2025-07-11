@@ -7,7 +7,6 @@
     "scripts": {
         "start": "node tagit.mjs",
         "test": "npx --node-options=\"--experimental-vm-modules --no-warnings\" jest --detectOpenHandles --silent",
-        "build": "pkg index.js --targets node18-linux-x64 --output tagit"
     },
     "repository": {
         "type": "git",
@@ -45,14 +44,5 @@
     "dependencies": {
         "@purinton/common": "^1.0.17",
         "dotenv": "^17.2.0"
-    },
-    "pkg": {
-        "scripts": [
-            "src/**/*.mjs"
-        ],
-        "assets": [],
-        "targets": [
-            "node18-linux-x64"
-        ]
     }
 }
